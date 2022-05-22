@@ -42,7 +42,7 @@ fs.mkdir(path.join(__dirname, 'project-dist'), {recursive: true}, () => {
     for (const file of files) {
       if (file.isFile() && path.extname(file.name) === '.css') {
         let readableStream = fs.createReadStream( path.join(__dirname, 'styles', file.name) );
-        readableStream.on('data', chunk => outputCSS.write(chunk));
+        readableStream.on('data', chunk => outputCSS.write(`${chunk}\n`));
       }
     }
   });

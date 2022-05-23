@@ -50,6 +50,12 @@ fs.mkdir(path.join(__dirname, 'project-dist'), {recursive: true}, () => {
 
 function copyFiles(nameDirectory) {
   fs.mkdir(path.join(__dirname, 'project-dist', 'assets', nameDirectory), {recursive: true}, () => {
+    fs.readdir(path.join(__dirname, 'project-dist', 'assets', nameDirectory), (err, files) => {
+      if (err) console.log(err);
+      for (const file of files) {
+        fs.unlink(path.join(__dirname, 'project-dist', 'assets', nameDirectory, file), () => {});
+      }
+    });
     fs.readdir(path.join(__dirname, 'assets', nameDirectory), {withFileTypes: true}, (err, files) => {
       if (err) console.log(err.code);
       for (const file of files) {
